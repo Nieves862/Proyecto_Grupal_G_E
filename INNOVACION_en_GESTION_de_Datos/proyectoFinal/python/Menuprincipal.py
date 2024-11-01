@@ -1,60 +1,74 @@
-from Sistemaev3 import Sistema
-import registrospluviales  
+from gestionAcceso import guardar_accesos
+from sistematf import Acceso, Sistema
+from datetime import datetime
+import registrospluviales
 
 def menu_principal():
     sistema = Sistema()
 
     while True:
         print("\nMenú Principal")
-        print("1. Agregar un nuevo usuario")
-        print("2. Modificar un usuario")
-        print("3. Eliminar un usuario")
-        print("4. Buscar un usuario por username o email")
-        print("5. Mostrar todos los usuarios")
-        print("6. Ordenar usuarios por username")  
-        print("7. Ingresar al sistema")
-        print("8. Gestionar Registros Pluviales")  
-        print("9. Salir")
+        print("1. Usuarios y Accesos de la Aplicación")
+        print("2. Ordenamiento y Búsqueda de Usuarios")
+        print("3. Gestion de base de datos") 
+        print("4. Gestionar Registros Pluviales")
+        print("5. Salir de la aplicación")
 
         opcion = input("Elige una opción: ")
 
         if opcion == "1":
-            usuario_nombre = input("Username: ")
-            password = input("Password: ")
-            e_mail = input("Email: ")
-            sistema.agregar_usuario(usuario_nombre, password, e_mail)
-
+            menu_usuarios_y_accesos(sistema)
         elif opcion == "2":
-            username_o_email = input("Ingresa el username o email del usuario a modificar: ")
+            menu_ordenamiento_y_busqueda(sistema)
+        elif opcion == "3":
+            menu_ingreso_sistema(sistema)
+        elif opcion == "4":
+            submenu_registros_pluviales() 
+        elif opcion == "5":
+            print("Saliendo del sistema...")
+            break
+        else:
+            print("Opción no válida. Intenta nuevamente.")
+
+def menu_usuarios_y_accesos(sistema):
+    while True:
+        print("\nUsuarios y Accesos")
+        print("1. Agregar un nuevo usuario")
+        print("2. Modificar un usuario")
+        print("3. Eliminar un usuario")
+        print("4. Mostrar datos de accesos")
+        print("5. Mostrar logs de intentos fallidos")
+        print("6. Ingresar al sistema")
+        print("7. Volver al Menú principal")
+
+        opcion = input("Elige una opción: ")
+
+        if opcion == "1":
+            username = input("Username: ")
+            password = input("Password: ")
+            email = input("Email: ")
+            dni = input("DNI: ")
+            sistema.agregar_usuario(username, dni, password, email)
+        elif opcion == "2":
+            dni = input("Ingresa el DNI del usuario a modificar: ")
             nuevo_username = input("Nuevo username (dejar en blanco si no quieres cambiarlo): ")
             nuevo_password = input("Nuevo password (dejar en blanco si no quieres cambiarlo): ")
             nuevo_email = input("Nuevo email (dejar en blanco si no quieres cambiarlo): ")
-            sistema.modificar_usuario(username_o_email, nuevo_username, nuevo_password, nuevo_email)
-
+            sistema.modificar_usuario(dni, nuevo_username, nuevo_password, nuevo_email)
         elif opcion == "3":
-            username_o_email = input("Ingresa el username o email del usuario a eliminar: ")
-            sistema.eliminar_usuario(username_o_email)
-
+            dni = input("Ingresa el DNI del usuario a eliminar: ")
+            sistema.eliminar_usuario(dni)
         elif opcion == "4":
-            username_o_email = input("Ingresa el username o email del usuario a buscar: ")
-            usuario = sistema.buscar_usuario(username_o_email)
-            if usuario:
-                print(usuario)
-            else:
-                print(f"Usuario {username_o_email} no encontrado.")
-
+            sistema.mostrar_accesos()
         elif opcion == "5":
-            sistema.mostrar_todos_usuarios()
-
-        elif opcion == "6": 
-            sistema.ordenar_por_sort()
-
-        elif opcion == "7":  
-            usuario_nombre = input("Username: ")
+            sistema.mostrar_logs()
+        elif opcion == "6":
+            username = input("Username: ")
             password = input("Password: ")
-            if sistema.login(usuario_nombre, password):  
-                usuario = sistema.buscar_usuario(usuario_nombre)  
-                sistema.registrar_acceso(usuario)  
+            if sistema.login(username, password):
+                usuario = sistema.buscar_usuario_por_username(username)
+                sistema.registrar_acceso(usuario)
+                print("Acceso registrado exitosamente.")
                 while True:
                     print("\n1. Volver al menú principal")
                     print("2. Salir del sistema")
@@ -67,16 +81,70 @@ def menu_principal():
                         print("Opción no válida.")
             else:
                 print("Error al iniciar sesión.")
-
-        elif opcion == "8":  
-            submenu_registros_pluviales()  
-        elif opcion == "9":  
-            print("Saliendo del sistema...")
-            break
-
+        elif opcion == "7":
+            break  
         else:
             print("Opción no válida. Intenta nuevamente.")
 
+def menu_ordenamiento_y_busqueda(sistema):
+    while True:
+        print("\nOrdenamiento y Búsqueda de Usuarios")
+        print("1. Ordenar usuarios por username")
+        print("2. Buscar usuario por DNI")
+        print("3. Busqueda usuario por username")
+        print("4. Busqueda usuario por email")
+        print("5. Mostrar todos los usuarios")
+        print("6. Volver al Menú principal")
+
+        opcion = input("Elige una opción: ")
+
+        if opcion == "1":
+            sistema.usuarios.sort(key=lambda usuario: usuario.get_username())
+            sistema.guardar_datos("usuarios.ispc", sistema.usuarios)
+            print("Usuarios ordenados por Username:")
+            for usuario in sistema.usuarios:
+                print(usuario.get_username())
+        elif opcion == "2":
+            dni = input("Ingrese el DNI a buscar: ")
+            usuario = sistema.buscar_usuario(dni)
+            if usuario:
+                print(usuario)
+            else:
+                print("Usuario no encontrado.")
+        elif opcion == "3":
+            username = input("Ingrese el Email a buscar: ")
+            usuario = sistema.buscar_usuario_por_username(username)
+            if usuario:
+                print(usuario)  # Mostrar los datos del usuario encontrado
+            else:
+                print("Usuario no encontrado.")
+        elif opcion == "4":
+            email = input("Ingrese el Email a buscar: ")
+            usuario = sistema.buscar_usuario_por_email(email)
+            if usuario:
+                print(usuario)  # Mostrar los datos del usuario encontrado
+            else:
+                print("Usuario no encontrado.")
+        elif opcion == "5":
+            sistema.mostrar_todos_usuarios()
+        elif opcion == "6":
+            break
+        else:
+            print("Opción no válida. Intenta nuevamente.")
+
+def menu_ingreso_sistema(sistema):
+    username = input("Username: ")
+    password = input("Password: ")
+    if sistema.login(username, password):
+        usuario = sistema.buscar_usuario_por_username(username)
+        acceso = Acceso(len(sistema.accesos) + 1, usuario)
+        sistema.accesos.append(acceso)
+        guardar_accesos("accesos.ispc", sistema.accesos)
+        print("Acceso registrado con éxito.")
+    else:
+        with open("logs.txt", "a") as f:
+            f.write(f"{datetime.now()} - Intento fallido: Usuario: {username}, Password: {password}\n")
+            print("Registro de intento fallido guardado.")
 
 def submenu_registros_pluviales():
     """Submenú para gestionar registros pluviales."""
@@ -127,7 +195,6 @@ def submenu_registros_pluviales():
 
         else:
             print("Opción no válida. Intente nuevamente.")
-
 
 if __name__ == "__main__":
     menu_principal()
