@@ -2,8 +2,10 @@ ________________________________________________________________________________
 # Proyecto_Grupal_Sistema_de_Transparencia
 ___________________________________________________________________________________________________________________________
 
-# Evidencia II - Módulo | Innovación en Gestión de Dados | - TSCDIA - 2024
-
+# Proyecto Final | Innovación en Gestión de Dados | - TSCDIA - 2024
+# Sistema de Transparencia Educativa
+**Fecha de entrega:** 04/11/2024
+## Proyecto ABP
 
 ## 👥 Colaboradores del Grupo 15:
 
@@ -16,39 +18,55 @@ ________________________________________________________________________________
 | Andrea Paola | Testa | 25442630 | andreaptesta@gmail.com | https://github.com/PaoTes | ** |
 
 
-#- Innovación en gestión de Datos | Programación I | Base de Datos II -
+## ⚙️Descripción del Proyecto
 
-## 📚 Introducción a POO y Uso de Archivos en Python
+El “Sistema de Transparencia Educativa” es un proyecto cuyo objetivo principal es facilitar la gestión y el análisis de datos académicos de los estudiantes en una institución educativa. Permite un seguimiento en tiempo real del estado académico de los estudiantes, abarcando aspectos como calificaciones, asistencia y materias en curso o pendientes.
 
-## 📝 Descripción:
- Se realizó la creación de un CRUD en Python para el manejo y control de Usuarios, según lo especificado en la documentación proporcionada para la actual evidencia.
- 
-## 🔶 Ejecución y testeo del Programa:
+## 🗂️Estructura de la Base de Datos
 
-### ⚙️ Requisitos previos:
-     ✔️ Nos aseguramos de tener instalado Python
-     
-### ⚙️ Lista de los archivos que tenemos que tener:
-     🗂️ usuario.py:  Para definir las clases Usuario y Acceso.
-     🗂️ manejoc.py: Contiene la clase Sistema con las operaciones para gestionar los usuarios.
-     🗂️ database.py: para la conexión a una base de datos.
-     🗂️ Menu1.py: con el menú principal
-     🗂️ Los otros archivos que se piden usuarios.ispc y accesos.ispc se generarán automáticamente al ejecutar el programa y guardar datos.
-     
-### ⚙️ Pasos para ejecutar:
+La base de datos del sistema consta de cinco tablas interrelacionadas:
 
-    ✔️ Fijarse que todos los archivos mencionados anteriormente estén en la misma carpeta. 
-    ✔️ Abrimos una terminal o línea de comandos en esa carpeta.
-    ✔️ Una vez en la terminal y dentro de la ubicación de los archivos ejecutamos el archivo principal que contiene la función main(), el cual se encuentra en el archivo menu1.py.
-    ✔️ Introducimos Python menu1.py. 
-    ✔️ Se siguieron las instrucciones del menú para agregar, modificar, eliminar o buscar usuarios, y probar el resto de las funcionalidades.
+- **cuarto_año**: Información detallada de los estudiantes.
+- **materia**: Datos de las materias.
+- **asistencia**: Registro de asistencia de los estudiantes.
+- **grupo**: Información sobre los grupos de estudiantes.
+- **nota_formativa**: Notas cualitativas de los estudiantes en cada materia.
 
-## 🔶¿Qué inconvenientes han tenido y si lograron superarlos?
+Estas tablas están conectadas mediante la ID de estudiante y la ID de materia, lo que permite un análisis exhaustivo del desempeño académico.
 
-### ⚙️ Fallas por errores u omisiones.
+### 🆕Nuevas Tablas
 
-    ⚠️ Nos faltaba importar librerías o funciones de forma correcta.
-    ⚠️ Al querer registrar accesos exitosos y fallidos generando el registro en logs.txt usuarios.ispc  o accesos.ispc, arrojaba error,  por falta de importación de librerías
-    ⚠️ Fallaba la conexión de ña base de datos por falta de mysql.connector
-    ⚠️ Por errores de tipeo no lográbamos encontrar problemas de funcionamiento de los scripts.
+Además, se han agregado las siguientes tablas para cumplir con las evidencias requeridas (2 y 3), aunque no forman parte del proyecto original:
 
+- **usuario**: Representa a los usuarios del sistema (administradores, profesores, etc.).
+- **acceso**: Registra accesos al sistema con detalles como fecha, hora, dirección IP y dispositivo.
+
+Estas tablas apoyan la **gestión de usuarios** y la **auditoría de accesos** para mejorar la seguridad y trazabilidad del sistema.
+
+## 🎯Objetivos del Proyecto
+
+El principal objetivo es ofrecer una herramienta que permita a los docentes y administrativos evaluar la situación académica de los alumnos en tiempo real, facilitando la toma de decisiones informadas.
+
+## 🔶Estrategia de Trabajo en Equipo
+
+Somos un grupo de estudiantes de la Tecnicatura de Ciencias de Datos e IA, con habilidades y experiencias diversas. A pesar de las diferencias geográficas, laborales, y personales, hemos desarrollado una estrategia colaborativa basada en el apoyo mutuo:
+
+- **Herramientas de Comunicación**: WhatsApp, videoconferencias cada dos días y plataformas colaborativas como Google Drive y GitHub.
+- **Distribución de Tareas**: Según las fortalezas individuales de cada miembro, con revisiones constantes para asegurar calidad y aprendizaje.
+- **Control de Versiones**: Uso de una rama adicional en GitHub para facilitar el trabajo colaborativo.
+
+### 🔶Desafíos Superados
+
+El grupo enfrentó y superó varios retos, como reorganizar tareas para cumplir con las evidencias requeridas, adaptarse a la distancia y los horarios variados, y desarrollar habilidades blandas y de trabajo en equipo.
+
+## 🔶Perspectivas del Proyecto
+
+El "Sistema de Transparencia Educativa" tiene el potencial de ser implementado y comercializado en el ámbito educativo, ofreciendo una solución ágil y completa a las necesidades de gestión de datos académicos en instituciones. A diferencia de la plataforma CIDI de Gestión Educativa, nuestro sistema aborda algunas de sus limitaciones, proponiendo una alternativa eficiente y transparente.
+
+
+
+## ✔️Conclusiones
+
+Las experiencias en el desarrollo del proyecto han sido enriquecedoras, permitiéndonos aprender, adaptarnos y superar desafíos. A pesar de los inconvenientes en la preparación de evidencias, el grupo ha demostrado resiliencia y compromiso. Estamos satisfechos con el trabajo colaborativo realizado y valoramos el crecimiento profesional, técnico y personal alcanzado a través de esta experiencia.
+
+```
